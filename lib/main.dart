@@ -1,5 +1,6 @@
 import './transaction.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 void main() {
   runApp(MyApp());
@@ -30,6 +31,8 @@ class MyScreen extends StatelessWidget {
       date: DateTime.now(),
     ),
   ];
+  String textInput;
+  String amtInput;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +40,7 @@ class MyScreen extends StatelessWidget {
         title: Text('Expensess'),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        // mainAxisAlignment: MainAxisAlignment.spaceAround,
         // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
@@ -48,6 +51,36 @@ class MyScreen extends StatelessWidget {
               // elevation: 85,
             ),
           ),
+          Card(
+            elevation: 10, 
+              child: Container(
+                padding: EdgeInsets.all(5),
+                child: Column(
+                  // crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+                TextField(
+                  decoration: InputDecoration(labelText: 'Title'),
+                  onChanged: (value) => textInput=value,
+                ),
+                TextField(
+                  decoration: InputDecoration(labelText: 'Amount'),
+                  onChanged: (val) => amtInput=val,
+                ),
+                FlatButton(
+                  onPressed: () {
+                    print(textInput);
+                  },
+                  child: Text(
+                    'Add Transaction',
+                    style: TextStyle(
+                      color: Colors.orange,
+                      // backgroundColor: Colors.purple
+                    ),
+                  ),
+                ),
+            ],
+          ),
+              )),
           Column(
             children: transaction.map((tx) {
               return Card(
@@ -66,7 +99,7 @@ class MyScreen extends StatelessWidget {
                       ),
                       padding: EdgeInsets.all(5),
                       child: Text(
-                        tx.amt.toString(),
+                        '\₹${tx.amt}',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 15,
@@ -84,7 +117,10 @@ class MyScreen extends StatelessWidget {
                             fontSize: 18,
                           ),
                         ),
-                        Text(tx.date.toString()),
+                        Text(
+                          DateFormat().format(tx.date),
+                        ),
+                        // Text(tx.date.toString()),
                       ],
                     ),
                   ],
