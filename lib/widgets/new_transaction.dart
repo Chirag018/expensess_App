@@ -1,10 +1,36 @@
 import 'package:flutter/material.dart';
 
-class NewTransaction extends StatelessWidget {
+class NewTransaction extends StatefulWidget {
   final Function addTx;
-  final titleController = TextEditingController();
-  final amtController = TextEditingController();
   NewTransaction(this.addTx);
+
+  @override
+  _NewTransactionState createState() => _NewTransactionState();
+}
+
+class _NewTransactionState extends State<NewTransaction> {
+  final titleController = TextEditingController();
+
+  final amtController = TextEditingController();
+
+  void submitData() {
+  
+    final enteredTitle=titleController.text;
+    final enteredAmt=double.parse(amtController.text);
+  
+    if(enteredTitle.isEmpty || enteredAmt<=0)
+    return;
+
+
+    widget.addTx(
+      enteredTitle,
+      enteredAmt,
+      // titleController.text,
+      // double.parse(amtController.text),
+    );
+    Navigator.of(context).pop();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -17,21 +43,22 @@ class NewTransaction extends StatelessWidget {
             TextField(
               decoration: InputDecoration(labelText: 'Title'),
               controller: titleController,
+              onSubmitted: (_) => submitData,
               // onChanged: (value) => textInput=value,
             ),
             TextField(
               decoration: InputDecoration(labelText: 'Amount'),
               // onChanged: (val) => amtInput=val,
               controller: amtController,
+              keyboardType: TextInputType.number,
+              onSubmitted: (_) => submitData,
             ),
             FlatButton(
-              onPressed: () {
-                addTx(
-                  titleController.text,
-                  double.parse(amtController.text),
-                );
-                // print(textInput);
-              },
+              onPressed: submitData,
+              // () {
+              //   submitData();
+              //   // print(textInput);
+              // },
               child: Text(
                 'Add Transaction',
                 style: TextStyle(
