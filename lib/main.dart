@@ -74,12 +74,12 @@ class _MyScreenState extends State<MyScreen> {
     ).toList();
   }
 
-  void _addNewTransaction(String title, double amt) {
+  void _addNewTransaction(String title, double amt, DateTime chosenDate) {
     final newTx = Transaction(
       id: DateTime.now().toString(),
       title: title,
       amt: amt,
-      date: DateTime.now(),
+      date: chosenDate,
     );
     setState(() {
       _userTransaction.add(newTx);
@@ -96,6 +96,12 @@ class _MyScreenState extends State<MyScreen> {
             behavior: HitTestBehavior.opaque,
           );
         });
+  }
+
+  void _deleteTx(String id) {
+    setState(() {
+      _userTransaction.removeWhere((element) => element.id == id);
+    });
   }
 
   @override
@@ -125,16 +131,16 @@ class _MyScreenState extends State<MyScreen> {
           // crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Chart(_recentTransactions),
-            Container(
-              width: double.infinity,
-              child: Card(
-                color: Colors.blue,
-                child: Text('Chart'),
-                // elevation: 85,
-              ),
-            ),
+            // Container(
+            //   width: double.infinity,
+            //   child: Card(
+            //     color: Colors.blue,
+            //     child: Text('Chart'),
+            //     // elevation: 85,
+            //   ),
+            // ),
             // UserTransaction(),
-            TransactionList(_userTransaction),
+            TransactionList(_userTransaction,_deleteTx),
           ],
         ),
       ),

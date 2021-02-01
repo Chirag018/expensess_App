@@ -9,4 +9,5 @@
 // theme in our main widget is used to give the same theme to our entire app , so that which ever color we use our theme remains same.
 // sizedbox --> it is used to add some space between 2 widgets ,if they are placed one beside another
 // where() --> is used to iterate every item in a list and it returns a iterable which can be converted into list by toList().
-
+// Flexfit --> is used to expand our widget in full size i.e. it will occupy all the remaining space available  ,there is also flexfit property in which we can choose if element should be loosely packed or tightly packed.
+// expanded --> is similar to flexfit but in this elements will be automatically tightly packed.        
