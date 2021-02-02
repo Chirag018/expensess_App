@@ -1,4 +1,3 @@
-// import './widgets/user_transaction.dart';
 import './widgets/new_transaction.dart';
 import './models/transaction.dart';
 import 'package:flutter/material.dart';
@@ -107,8 +106,6 @@ class _MyScreenState extends State<MyScreen> {
 
   @override
   Widget build(BuildContext context) {
-<<<<<<< Updated upstream
-=======
     final isLandScape =
         MediaQuery.of(context).orientation == Orientation.landscape;
     final appBar = AppBar(
@@ -129,7 +126,6 @@ class _MyScreenState extends State<MyScreen> {
           0.6,
       child: TransactionList(_userTransaction, _deleteTx),
     );
->>>>>>> Stashed changes
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
@@ -138,25 +134,13 @@ class _MyScreenState extends State<MyScreen> {
         },
         child: Icon(Icons.add),
       ),
-      appBar: AppBar(
-        title: Text('Expensess'),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.add),
-            onPressed: () {
-              _startAddNewTransx(context);
-            },
-          ),
-        ],
-      ),
+      appBar: appBar,
       body: SingleChildScrollView(
         child: Column(
           // mainAxisAlignment: MainAxisAlignment.spaceAround,
           // crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-<<<<<<< Updated upstream
-            Chart(_recentTransactions),
-=======
+            // Chart(_recentTransactions),
             if (isLandScape)
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -199,7 +183,6 @@ class _MyScreenState extends State<MyScreen> {
                       child: Chart(_recentTransactions),
                     )
                   : txList,
->>>>>>> Stashed changes
             // Container(
             //   width: double.infinity,
             //   child: Card(
@@ -209,10 +192,7 @@ class _MyScreenState extends State<MyScreen> {
             //   ),
             // ),
             // UserTransaction(),
-<<<<<<< Updated upstream
-            TransactionList(_userTransaction,_deleteTx),
-=======
->>>>>>> Stashed changes
+            // TransactionList(_userTransaction,_deleteTx),
           ],
         ),
       ),
