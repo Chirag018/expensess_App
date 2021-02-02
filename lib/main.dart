@@ -62,6 +62,7 @@ class _MyScreenState extends State<MyScreen> {
     // ),
   ];
 
+  bool _showChart = false;
   List<Transaction> get _recentTransactions {
     return _userTransaction.where(
       (tx) {
@@ -106,6 +107,29 @@ class _MyScreenState extends State<MyScreen> {
 
   @override
   Widget build(BuildContext context) {
+<<<<<<< Updated upstream
+=======
+    final isLandScape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
+    final appBar = AppBar(
+      title: Text('Expensess'),
+      actions: [
+        IconButton(
+          icon: Icon(Icons.add),
+          onPressed: () {
+            _startAddNewTransx(context);
+          },
+        ),
+      ],
+    );
+    final txList = Container(
+      height: (MediaQuery.of(context).size.height -
+              appBar.preferredSize.height -
+              MediaQuery.of(context).padding.top) *
+          0.6,
+      child: TransactionList(_userTransaction, _deleteTx),
+    );
+>>>>>>> Stashed changes
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
@@ -130,7 +154,52 @@ class _MyScreenState extends State<MyScreen> {
           // mainAxisAlignment: MainAxisAlignment.spaceAround,
           // crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+<<<<<<< Updated upstream
             Chart(_recentTransactions),
+=======
+            if (isLandScape)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('Show Charts .'),
+                  Switch(
+                    value: _showChart,
+                    onChanged: (val) {
+                      setState(() {
+                        _showChart = val;
+                      });
+                    },
+                  ),
+                ],
+              ),
+            if (!isLandScape)
+              Container(
+                height: (MediaQuery.of(context).size.height -
+                        appBar.preferredSize
+                            .height - // the given line is used to find the height of appbar.
+                        MediaQuery.of(
+                                context) // it is used to find the height of status bar.
+                            .padding
+                            .top) *
+                    0.3,
+                child: Chart(_recentTransactions),
+              ),
+            if (!isLandScape) txList,
+            if (isLandScape)
+              _showChart
+                  ? Container(
+                      height: (MediaQuery.of(context).size.height -
+                              appBar.preferredSize
+                                  .height - // the given line is used to find the height of appbar.
+                              MediaQuery.of(
+                                      context) // it is used to find the height of status bar.
+                                  .padding
+                                  .top) *
+                          0.8,
+                      child: Chart(_recentTransactions),
+                    )
+                  : txList,
+>>>>>>> Stashed changes
             // Container(
             //   width: double.infinity,
             //   child: Card(
@@ -140,7 +209,10 @@ class _MyScreenState extends State<MyScreen> {
             //   ),
             // ),
             // UserTransaction(),
+<<<<<<< Updated upstream
             TransactionList(_userTransaction,_deleteTx),
+=======
+>>>>>>> Stashed changes
           ],
         ),
       ),
