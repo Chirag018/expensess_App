@@ -11,3 +11,6 @@
 // where() --> is used to iterate every item in a list and it returns a iterable which can be converted into list by toList().
 // Flexfit --> is used to expand our widget in full size i.e. it will occupy all the remaining space available  ,there is also flexfit property in which we can choose if element should be loosely packed or tightly packed.
 // expanded --> is similar to flexfit but in this elements will be automatically tightly packed.        
+// Responsive --> it means in which mode we are using our phone + which device that is tablet,pc ,etc.
+// adaptive --> it means our code should adopt to both android and ios based on their properties .
+

@@ -1,12 +1,20 @@
 // import './widgets/user_transaction.dart';
+import 'package:flutter/services.dart';
+
 import './widgets/new_transaction.dart';
 import './models/transaction.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter/services.dart';
 import 'widgets/chart.dart';
 import 'widgets/transaction_list.dart';
 
 void main() {
+  // SystemChrome.setPreferredOrientations(
+  //   [
+  //     DeviceOrientation.portraitUp,
+  //     DeviceOrientation.portraitDown,
+  //   ],
+  // );
   runApp(MyApp());
 }
 
@@ -106,6 +114,17 @@ class _MyScreenState extends State<MyScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final appBar = AppBar(
+      title: Text('Expensess'),
+      actions: [
+        IconButton(
+          icon: Icon(Icons.add),
+          onPressed: () {
+            _startAddNewTransx(context);
+          },
+        ),
+      ],
+    );
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
@@ -114,23 +133,23 @@ class _MyScreenState extends State<MyScreen> {
         },
         child: Icon(Icons.add),
       ),
-      appBar: AppBar(
-        title: Text('Expensess'),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.add),
-            onPressed: () {
-              _startAddNewTransx(context);
-            },
-          ),
-        ],
-      ),
+      appBar: appBar,
       body: SingleChildScrollView(
         child: Column(
           // mainAxisAlignment: MainAxisAlignment.spaceAround,
           // crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Chart(_recentTransactions),
+            Container(
+              height: (MediaQuery.of(context).size.height -
+                      appBar.preferredSize
+                          .height - // the given line is used to find the height of appbar.
+                      MediaQuery.of(
+                              context) // it is used to find the height of status bar.
+                          .padding
+                          .top) *
+                  0.4,
+              child: Chart(_recentTransactions),
+            ),
             // Container(
             //   width: double.infinity,
             //   child: Card(
@@ -140,7 +159,13 @@ class _MyScreenState extends State<MyScreen> {
             //   ),
             // ),
             // UserTransaction(),
-            TransactionList(_userTransaction,_deleteTx),
+            Container(
+              height: (MediaQuery.of(context).size.height -
+                      appBar.preferredSize.height -
+                      MediaQuery.of(context).padding.top) *
+                  0.6,
+              child: TransactionList(_userTransaction, _deleteTx),
+            ),
           ],
         ),
       ),
